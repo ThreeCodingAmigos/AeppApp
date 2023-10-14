@@ -1,8 +1,13 @@
-function App() {
+import { InputContainer } from './components/Input/InputContainer.jsx';
+import { Header } from "./components/UI/Header.jsx";
+import {OutputContainer} from "./components/Output/OutputContainer.jsx";
 
+export const App = () => {
     return (
-        <p>Test</p>
-    )
+        <>
+            <Header/>
+            <InputContainer />
+            <OutputContainer />
+        </>
+    );
 }
-
-export default App
