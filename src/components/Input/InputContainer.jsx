@@ -1,44 +1,38 @@
-import styles from './InputContainer.module.css';
-import React, {useEffect, useState} from 'react';
-import {Row} from "./Row.jsx";
+import styles from "./InputContainer.module.css";
+import { Row } from "./Row.jsx";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useRef, useEffect } from "react";
+import { inputActions } from "../../store/input-slice";
 
 export const InputContainer = () => {
-    //States
-    const [rows, setRows] = useState([
-        {
-            rowNumber: 0,
-            rowContent: ''
-        },
-    ]);
+  const rows = useSelector((state) => state.input.rows);
+  const focusedRow = rows.find((row) => row.isFocused);
+  const focusedInputRef = useRef(null);
+  const dispatch = useDispatch();
 
-    const changeHandler = (event, rowNumber) => {
-        const updatedRows = [...rows];
-        updatedRows[rowNumber].rowContent = event.target.value;
-        setRows(updatedRows);
+  const enterHandler = (event) => {
+    event.preventDefault();
+    const code = event.code;
+    console.log(rows);
+    dispatch(inputActions.enter(code));
+  };
+  useEffect(() => {
+    if (focusedInputRef.current) {
+      focusedInputRef.current.focus();
     }
+  }, [focusedRow]);
 
-    const enterHandler = (event, rowNumber) => {
-        if (event.key === 'Enter') {
-            setRows((prevState) => [
-                ...prevState,
-                {
-                    rowNumber: rowNumber + 1,
-                    rowContent: ''
-                },
-            ]);
-        }
-    }
-
-    return (
-        <div className={styles.inputContainer}>
-            {rows.map((row, index) => (
-                <Row
-                    rowNumber={row.rowNumber}
-                    onChange={(event) => changeHandler(event, index)}
-                    onKeyDown={(event) => enterHandler(event, index)}
-                    key={row.rowNumber}
-                />
-            ))}
-        </div>
-    );
-}
+  return (
+    <div className={styles.inputContainer}>
+      {rows.map((row) => (
+        <Row
+          rowNumber={row.rowNumber}
+          onEnter={enterHandler}
+          key={row.key}
+          placeholder={row.placeholder}
+          ref={row.isFocused ? focusedInputRef : null}
+        />
+      ))}
+    </div>
+  );
+};

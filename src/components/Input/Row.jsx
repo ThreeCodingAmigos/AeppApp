@@ -5,7 +5,11 @@ export const Row = (props) => {
     return (
         <div className={styles.row}>
             <p>{props.rowNumber}</p>
-            <input type="text" onChange={props.onChange} onKeyDown={props.onKeyDown}/>
+            <input
+                type="text"
+                onKeyDown={props.onEnter}
+                placeholder={props.placeholder}
+            />
         </div>
     );
 }
