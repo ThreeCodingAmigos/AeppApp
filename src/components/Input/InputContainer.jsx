@@ -16,10 +16,10 @@ export const InputContainer = () => {
     console.log(rows);
     dispatch(inputActions.enter(code));
   };
+
   useEffect(() => {
-    if (focusedInputRef.current) {
-      focusedInputRef.current.focus();
-    }
+    console.log(focusedInputRef);
+    focusedInputRef.current.focus();
   }, [focusedRow]);
 
   return (

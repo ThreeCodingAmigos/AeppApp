@@ -1,7 +1,7 @@
 import styles from "./Row.module.css";
-import React from "react";
+import React, { forwardRef } from "react";
 
-export const Row = (props) => {
+export const Row = forwardRef((props, ref) => {
     return (
         <div className={styles.row}>
             <p>{props.rowNumber}</p>
@@ -9,7 +9,8 @@ export const Row = (props) => {
                 type="text"
                 onKeyDown={props.onEnter}
                 placeholder={props.placeholder}
+                ref={ref}
             />
         </div>
     );
-}
+});
