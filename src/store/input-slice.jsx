@@ -39,10 +39,6 @@ export const inputSlice = createSlice({
         state.rows.push(newRow);
       }
     },
-    type(state, action) {
-      const activeRow = state.rows.find((row) => row.isFocused);
-      activeRow.rowContent = activeRow.rowContent + action.payload;
-    }
   },
 });
 

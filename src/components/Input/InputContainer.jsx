@@ -13,8 +13,6 @@ export const InputContainer = () => {
   const changeHandler = (event) => {
     if (event.key === "Enter") {
       dispatch(inputActions.enter(event.code));
-    } else if (typeof event.key === 'string' && event.key !== 'Enter'){
-      dispatch(inputActions.type(event.key));
     }
   };
 
