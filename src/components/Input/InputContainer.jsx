@@ -11,9 +11,16 @@ export const InputContainer = () => {
   const dispatch = useDispatch();
 
   const changeHandler = (event) => {
+    console.log(event.target.value);
     if (event.key === "Enter") {
       dispatch(inputActions.enter(event.code));
+    } 
+    else if (event.key === 'Backspace' && focusedRow.rowContent === '' && focusedRow.rowNumber !== 0) {
+      console.log(focusedRow.rowContent);
+      dispatch(inputActions.deleteRow());
     }
+    console.log('Change Handler',);
+    dispatch(inputActions.type(event.target.value));
   };
 
   useEffect(() => {
@@ -25,10 +32,12 @@ export const InputContainer = () => {
       {rows.map((row) => (
         <Row
           rowNumber={row.rowNumber}
+          rowContent={row.rowContent}
           onChange={(ev) => changeHandler(ev)}
           key={row.key}
           placeholder={row.placeholder}
           ref={row.isFocused ? focusedInputRef : null}
+          isFocused={row.isFocused}
         />
       ))}
     </div>

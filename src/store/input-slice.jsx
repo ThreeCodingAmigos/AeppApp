@@ -39,6 +39,22 @@ export const inputSlice = createSlice({
         state.rows.push(newRow);
       }
     },
+    deleteRow(state, action) {
+      const focusedRow = state.rows.find((row) => row.isFocused);
+      console.log(focusedRow.rowNumber);
+      state.rows.splice(focusedRow.rowNumber - 1, 1);
+      // focusedRow.isFocused = false;
+
+      const previousIndex = focusedRow.rowNumber - 1;
+      state.rows[state.rows.length - 1].rowNumber = previousIndex;
+      state.rows[state.rows.length - 1].key = previousIndex;
+      state.rows[previousIndex].isFocused = true;
+    },
+    type(state, action) {
+      console.log(action.payload);
+      const focusedRow = state.rows.find((row) => row.isFocused);
+      focusedRow.rowContent = action.payload;
+    }
   },
 });
 
