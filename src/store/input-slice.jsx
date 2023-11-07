@@ -43,7 +43,6 @@ export const inputSlice = createSlice({
       const focusedRow = state.rows.find((row) => row.isFocused);
       console.log(focusedRow.rowNumber);
       state.rows.splice(focusedRow.rowNumber - 1, 1);
-      // focusedRow.isFocused = false;
 
       const previousIndex = focusedRow.rowNumber - 1;
       state.rows[state.rows.length - 1].rowNumber = previousIndex;

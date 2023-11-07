@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 
 export const Row = forwardRef((props, ref) => {
     const rowClasses = props.isFocused ? `${styles.row} + ' ' + ${styles.focusedRow}` : styles.row;
-    console.log(rowClasses);
+
     return (
         <div className={rowClasses}>
             <p>{props.rowNumber}</p>
