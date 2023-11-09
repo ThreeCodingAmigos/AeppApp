@@ -26,7 +26,8 @@ export const inputSlice = createSlice({
           key: 1,
           isFocused: true,
         });
-      } else {
+      } 
+      else {
         const newRowNumber = state.rows[state.rows.length - 1].rowNumber + 1;
         state.rows[state.rows.length - 1].isFocused = false;
         const newRow = {
@@ -41,18 +42,22 @@ export const inputSlice = createSlice({
     },
     deleteRow(state, action) {
       const focusedRow = state.rows.find((row) => row.isFocused);
-      console.log(focusedRow.rowNumber);
-      state.rows.splice(focusedRow.rowNumber - 1, 1);
-
-      const previousIndex = focusedRow.rowNumber - 1;
-      state.rows[state.rows.length - 1].rowNumber = previousIndex;
-      state.rows[state.rows.length - 1].key = previousIndex;
-      state.rows[previousIndex].isFocused = true;
+      state.rows.splice(action.payload, 1);
+      state.rows.map(row => row.rowNumber - 1); //
+      const newIndex = focusedRow.rowNumber - 1;
+      state.rows[newIndex].isFocused = true;
     },
     type(state, action) {
-      console.log(action.payload);
+      const focusedRow = state.rows.find((row) => row.isFocused);
+      focusedRow.rowContent += action.payload;
+    }, 
+    backspace(state, action) {
       const focusedRow = state.rows.find((row) => row.isFocused);
       focusedRow.rowContent = action.payload;
+      console.log('backspace', focusedRow.rowContent);
+    },
+    clickToChangeRow(state, action) {
+      
     }
   },
 });
