@@ -12,6 +12,12 @@
     position: absolute;
 }
 
+.header {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 hr {
     width:100%;
     border:1px solid #353b3b;
